@@ -15,8 +15,8 @@ public class AccidentMemService implements AccidentService {
     private final AccidentMemRepository repository;
 
     @Override
-    public Accident create(Accident accident) {
-        return repository.create(accident);
+    public Accident save(Accident accident) {
+        return repository.save(accident);
     }
 
     @Override
@@ -32,5 +32,10 @@ public class AccidentMemService implements AccidentService {
     @Override
     public boolean deleteById(int id) {
         return repository.deleteById(id);
+    }
+
+    @Override
+    public boolean update(Accident accident) {
+        return repository.update(accident);
     }
 }

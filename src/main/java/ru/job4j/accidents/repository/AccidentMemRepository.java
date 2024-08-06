@@ -18,14 +18,8 @@ public class AccidentMemRepository implements AccidentRepository {
 
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
 
-    private AccidentMemRepository() {
-        create(new Accident(0, "Иванов И.И.", "превышение скорости", "Москва, ул.Вернадского, 8"));
-        create(new Accident(0, "Кочанов С.В.", "пересечение сплошной линии", "Москва, ул. Гоголя, 34"));
-        create(new Accident(0, "Лаврова Е.И.", "остановка в неположенном месте", "Москва, ул.Пионеров, 75"));
-    }
-
     @Override
-    public Accident create(Accident accident) {
+    public Accident save(Accident accident) {
         accident.setId(nextId.getAndIncrement());
         accidents.put(accident.getId(), accident);
         return accident;
@@ -44,5 +38,12 @@ public class AccidentMemRepository implements AccidentRepository {
     @Override
     public boolean deleteById(int id) {
         return accidents.remove(id) != null;
+    }
+
+    @Override
+    public boolean update(Accident accident) {
+        return accidents.computeIfPresent(accident.getId(), (id, oldAccident) ->
+                new Accident(oldAccident.getId(), accident.getName(), accident.getText(),
+                        accident.getAddress())) != null;
     }
 }
