@@ -1,5 +1,6 @@
 package ru.job4j.accidents.repository;
 
+import lombok.AllArgsConstructor;
 import net.jcip.annotations.ThreadSafe;
 import org.springframework.stereotype.Repository;
 import ru.job4j.accidents.model.Accident;
@@ -12,6 +13,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 @ThreadSafe
 @Repository
+@AllArgsConstructor
 public class AccidentMemRepository implements AccidentRepository {
 
     private final AtomicInteger nextId = new AtomicInteger(1);

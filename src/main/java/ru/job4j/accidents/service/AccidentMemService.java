@@ -20,6 +20,16 @@ public class AccidentMemService implements AccidentService {
     }
 
     @Override
+    public Optional<Accident> create(Accident accident) {
+        var newAccident = new Accident();
+        newAccident.setId(0);
+        newAccident.setName(accident.getName());
+        newAccident.setText(accident.getText());
+        newAccident.setAddress(accident.getAddress());
+        return Optional.of(repository.save(newAccident));
+    }
+
+    @Override
     public Collection<Accident> findAll() {
         return repository.findAll();
     }
