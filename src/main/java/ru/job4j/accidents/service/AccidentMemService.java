@@ -26,6 +26,7 @@ public class AccidentMemService implements AccidentService {
         newAccident.setName(accident.getName());
         newAccident.setText(accident.getText());
         newAccident.setAddress(accident.getAddress());
+        newAccident.setType(accident.getType());
         return Optional.of(repository.save(newAccident));
     }
 
