@@ -5,9 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.job4j.accidents.model.Accident;
-import ru.job4j.accidents.service.AccidentMemService;
-import ru.job4j.accidents.service.AccidentTypeMemService;
-import ru.job4j.accidents.service.RuleMemService;
+import ru.job4j.accidents.service.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/accidents")
 public class AccidentController {
 
-    private final AccidentMemService accidentService;
-    private final AccidentTypeMemService typesService;
-    private final RuleMemService rulesService;
+    private final AccidentJdbcService accidentService;
+    private final AccidentTypeJdbcService typesService;
+    private final RuleJdbcService rulesService;
 
     @GetMapping("/createAccident")
     public String viewCreateAccident(Model model) {
@@ -30,12 +28,12 @@ public class AccidentController {
     @PostMapping("/saveAccident")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        accidentService.create(accident);
+        accidentService.save(accident);
         return "redirect:/index";
     }
 
     @GetMapping("/editAccident")
-    public String update(@RequestParam("id") int id, Model model) {
+    public String update(@RequestParam("id") Long id, Model model) {
         var accident = accidentService.findById(id);
         if (accident.isEmpty()) {
             model.addAttribute("message", "Происшествие с указанным идентификатором не найдено");

@@ -13,16 +13,16 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 public class RuleMemRepository implements RuleRepository {
 
-    private final Map<Integer, Rule> rules = new ConcurrentHashMap<>() {
+    private final Map<Long, Rule> rules = new ConcurrentHashMap<>() {
         {
-            put(1, new Rule(1, "Статья. 1"));
-            put(2, new Rule(2, "Статья. 2"));
-            put(3, new Rule(3, "Статья. 3"));
+            put(1L, new Rule(1L, "Статья. 1"));
+            put(2L, new Rule(2L, "Статья. 2"));
+            put(3L, new Rule(3L, "Статья. 3"));
         }
     };
 
     @Override
-    public Optional<Rule> findById(int id) {
+    public Optional<Rule> findById(Long id) {
         return Optional.ofNullable(rules.get(id));
     }
 

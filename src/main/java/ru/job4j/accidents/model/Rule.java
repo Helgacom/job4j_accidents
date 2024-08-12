@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Rule {
     @EqualsAndHashCode.Include
-    private int id;
+    private Long id;
 
     private String name;
 }

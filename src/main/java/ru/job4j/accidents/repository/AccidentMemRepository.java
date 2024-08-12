@@ -9,16 +9,16 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 @ThreadSafe
 @Repository
 @AllArgsConstructor
 public class AccidentMemRepository implements AccidentRepository {
 
-    private final AtomicInteger nextId = new AtomicInteger(1);
+    private final AtomicLong nextId = new AtomicLong(1);
 
-    private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
+    private final Map<Long, Accident> accidents = new ConcurrentHashMap<>();
 
     @Override
     public Accident save(Accident accident) {
@@ -33,12 +33,12 @@ public class AccidentMemRepository implements AccidentRepository {
     }
 
     @Override
-    public Optional<Accident> findById(int id) {
+    public Optional<Accident> findById(Long id) {
         return Optional.ofNullable(accidents.get(id));
     }
 
     @Override
-    public boolean deleteById(int id) {
+    public boolean deleteById(Long id) {
         return accidents.remove(id) != null;
     }
 

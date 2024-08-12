@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface TypeRepository {
 
-    Optional<AccidentType> findById(int id);
+    Optional<AccidentType> findById(Long id);
 
     Collection<AccidentType> findAll();
 }

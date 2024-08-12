@@ -13,16 +13,16 @@ import java.util.concurrent.ConcurrentHashMap;
 @AllArgsConstructor
 public class AccidentTypeMemRepository implements TypeRepository {
 
-    private final Map<Integer, AccidentType> types = new ConcurrentHashMap<>() {
+    private final Map<Long, AccidentType> types = new ConcurrentHashMap<>() {
         {
-            put(1, new AccidentType(1, "Две машины"));
-            put(2, new AccidentType(2, "Машина и человек"));
-            put(3, new AccidentType(3, "Машина и велосипед"));
+            put(1L, new AccidentType(1L, "Две машины"));
+            put(2L, new AccidentType(2L, "Машина и человек"));
+            put(3L, new AccidentType(3L, "Машина и велосипед"));
         }
     };
 
     @Override
-    public Optional<AccidentType> findById(int id) {
+    public Optional<AccidentType> findById(Long id) {
         return Optional.ofNullable(types.get(id));
     }
 
